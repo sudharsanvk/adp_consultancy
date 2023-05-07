@@ -1,0 +1,97 @@
+import React,{useEffect,useState} from 'react'
+import adp from '../../images/adp.png'
+import { Link } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import axios from 'axios';
+import { ToastContainer, toast } from "react-toastify";
+
+
+import './Navbar.css'
+
+export default function Navbar() {
+    const navigate = useNavigate();
+    const [cookies, setCookie, removeCookie] = useCookies([]);
+    const [cook,setCook] = useState()
+    // console.log(cookies.jwt);
+    console.log(localStorage.getItem("token"))
+     useEffect(() => {
+        const verifyUser = async () => {
+            setCook(localStorage.getItem("token"))
+          if (!cookies.jwt) {
+            // navigate("/login");
+          } else {
+            const { data } = await axios.post(
+              "http://localhost:2882/auth/",
+              {},
+              {
+                withCredentials: true,
+              } 
+            );
+            if (!data.status) {
+              removeCookie("jwt");
+              navigate("/");
+            } else
+              toast(`Hi ${data.user} `, {
+                theme: "dark",
+              });
+          }
+        };
+        verifyUser();
+      }, [cookies, navigate, removeCookie]);
+
+      const logOut = ()=>{
+        localStorage.removeItem('token')
+        // navigate('/')
+        console.log("first")
+      }
+     
+
+  return (
+    <>
+        <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Today's Offer</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#">Products</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#">How to Cook</a>
+                </li>
+                <li class="nav-item">
+                <a class="navbar-brand" href="/">
+                    <img src={adp} alt="" />
+                </a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#">People</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#">Infrastructure</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#">
+
+                {
+                    cook?(<button onClick={logOut()}>Log out</button>):(<Link to="/login">Login</Link>)
+                }
+                   
+                    
+
+                </a>
+                </li>
+            </ul>
+            </div>
+        </div>
+        </nav>
+        <ToastContainer />
+    </>
+  )
+}
