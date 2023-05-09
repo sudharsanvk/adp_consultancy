@@ -62,9 +62,36 @@ module.exports.allProducts = async(req,res)=>{
 
 module.exports.product = async(req,res)=>{
     try{
-        console.log("first")
+        console.log('one product')
+        console.log(req.params.id)
         await product.findById(req.params.id)
         .then((data)=>{
+            console.log(data)
+            res.send(data)
+        })
+        .catch((err)=>{
+            res.send(err)
+        console.log(err)
+
+        })
+    }
+
+    catch(err)
+    {
+        res.send(err)
+        console.log(err)
+    }
+} 
+
+
+
+module.exports.deleteOne = async(req,res)=>{
+    try{
+        console.log('one product')
+        console.log(req.params.id)
+        await product.findByIdAndDelete(req.params.id)
+        .then((data)=>{
+            console.log(data)
             res.send(data)
         })
         .catch((err)=>{
