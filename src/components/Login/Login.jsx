@@ -10,11 +10,10 @@ function Login() {
   
   const navigate = useNavigate();
   useEffect(() => {
-    if (cookies.jwt) {
-      console.log(cookies.jwt)
+    if (localStorage.getItem('isLoggedIn')) {
       navigate("/");
     }
-  }, [cookies, navigate]);
+  }, [navigate]);
 
   const [values, setValues] = useState({ email: "", password: "" });
   const generateError = (error) =>
@@ -24,17 +23,20 @@ function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await axios.post(
+         await axios.post(
         "http://localhost:2882/auth/login",
         {
           ...values,
         },
         { withCredentials: true }
       ).then(response => {
-        console.log(response.data)
-        localStorage.setItem('token', response.data.token);
+        console.log("token")
+        console.log(response.data.token)
+        console.log("token")
 
-        if (response.data) {
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('isLoggedIn', true); 
+
           if (response.data.errors) {
             const { email, password } = response.data.errors;
             if (email) generateError(email);
@@ -42,7 +44,6 @@ function Login() {
           } else {
             navigate("/");
           }
-        }
 
       })
       .catch(error => {

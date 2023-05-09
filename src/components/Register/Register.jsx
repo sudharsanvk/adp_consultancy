@@ -4,13 +4,13 @@ import { ToastContainer, toast } from "react-toastify";
 import { useCookies } from "react-cookie";
 import { Link, useNavigate } from "react-router-dom";
 function Register() {
-  const [cookies] = useCookies(["cookie-name"]);
   const navigate = useNavigate();
+
   useEffect(() => {
-    if (cookies.jwt) {
+    if (localStorage.getItem('isLoggedIn')) {
       navigate("/");
     }
-  }, [cookies, navigate]);
+  }, [navigate]);
 
 
 
@@ -37,7 +37,7 @@ function Register() {
           if (email) generateError(email);
           else if (password) generateError(password);
         } else {
-          navigate("/");
+          navigate("/login");
         }
       }
     } catch (ex) {

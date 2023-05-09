@@ -10,7 +10,8 @@ import AddProduct from './components/Admin/AddProduct/AddProduct'
 import AdminProduct from './components/Admin/Product/Product'
 import Product from './components/Product/Product'
 import EditProduct from './components/Admin/Products/Products'
-import Products from './components/Admin/Products/Products'
+import AdminProducts from './components/Admin/Products/Products'
+import Products from './components/Products/Products'
 
 export default function Routing() {
   return (
@@ -24,12 +25,12 @@ export default function Routing() {
             <Route exact path="/nv" element={<NVProducts/>} />
             <Route exact path="/login" element={<Login/>} />
             <Route exact path="/register" element={<Register/>} />
-            
+            <Route exact path="/products" element={<Products/>} />
             <Route exact path="/product/:id" element={<Product/>} />
 
-            <Route exact path="admin/add" element={<AddProduct/>} />
-            <Route exact path="admin/products" element={<Products/>} />
-            <Route exact path="admin/product/:id" element={<AdminProduct/>} />
+            <Route exact path="/admin/add" element={<AddProduct/>} />
+            <Route exact path="/admin/products" element={<AdminProducts/>} />
+            <Route exact path="/admin/product/:id" element={<AdminProduct/>} />
 
         </Routes>
     </BrowserRouter>

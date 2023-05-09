@@ -48,6 +48,11 @@ export default function Product() {
             </div>
 
             <div className="product-details">
+
+                <a className='add-to-cart' href="">
+                <i class="fa-solid fa-cart-plus"></i>
+                </a>
+
                 <div className="product-name">
                     {data.p_name}
                 </div>
@@ -65,16 +70,108 @@ export default function Product() {
                 </div>
 
                 <div className="recipe-ingredients">
-                    <button className='recipe-btn btn btn-warning'>
-                        Recipe
+                    <button type="button" class="recipe-btn btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Ingredients
                     </button>
 
-                    <button className='ingredients-btn btn btn-warning'>
-                        Ingredients
+                    <button type="button" class="recipe-btn btn btn-warning" data-bs-toggle="modal" data-bs-target="#recipeModal">
+                    Recipe
                     </button>
                 </div>
             </div>
         </div>
+
+
+<div class="modal fade" id="recipeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Recipe</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+
+      <ul>
+              {
+               data.recipe!=null?(
+                    data.recipe.map((ing)=>{
+                        return(
+                            <>
+                            {
+                                ing!='' ?(<>
+                                <li>{ing}</li>
+                                </>):(<></>)
+                            }               
+            
+                            </>
+                          )
+                      })
+                ):
+                (
+                    <>
+                           <li>{data.recipe}</li>
+                          </>
+                )
+              }
+            </ul>
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
     </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ingredients</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+
+      <ul>
+              {
+                data.ingredients!=null?(
+                    data.ingredients.map((ing)=>{
+                        return(
+                          <>
+                            {
+                                ing!='' ?(<>
+                                <li>{ing}</li>
+                                </>):(<></>)
+                            }    
+                          </>
+                        )
+                      })
+                ):
+                (
+                    <>
+                           <li>{data.ingredients}</li>
+                          </>
+                )
+              }
+            </ul>
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </div>
+
   )
 }

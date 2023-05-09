@@ -26,6 +26,7 @@ export default function AddProduct() {
       'Content-Type': 'multipart/form-data'
   }}
      ).then((response)=>{
+      console.log(response.data.url)
       // setValues({ ...values, [e.target.name]: e.target.value })
       setValues({ ...values, 'image_url': response.data.url })
       console.log(values.url) 
@@ -40,6 +41,7 @@ export default function AddProduct() {
      ).then((response)=>{
       // const fileName=response.url;
       console.log(response)   
+      navigate('/admin/products')
   })
   .catch((err)=>{
     console.log(err)

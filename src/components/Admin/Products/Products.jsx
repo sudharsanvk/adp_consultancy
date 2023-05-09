@@ -10,7 +10,7 @@ import { useState } from 'react'
 
 import { useNavigate } from 'react-router-dom'
 
-export default function Products() {
+export default function AdminProducts() {
 
     const navigate = useNavigate()
     const[data,setData] = useState([])
