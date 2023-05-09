@@ -7,6 +7,7 @@ import Login from './components/Login/Login'
 import Navbar from './components/Navbar/Navbar'
 import Register from './components/Register/Register'
 import AddProduct from './components/Admin/AddProduct/AddProduct'
+import Product from './components/Product/Product'
 
 export default function Routing() {
   return (
@@ -21,6 +22,8 @@ export default function Routing() {
             <Route exact path="/login" element={<Login/>} />
             <Route exact path="/register" element={<Register/>} />
             <Route exact path="/add" element={<AddProduct/>} />
+            <Route exact path="/product/:id" element={<Product/>} />
+
         </Routes>
     </BrowserRouter>
     </>    

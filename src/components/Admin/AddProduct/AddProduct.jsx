@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-
+import './AddProduct.css'
 
 export default function AddProduct() {
 
@@ -26,12 +26,26 @@ export default function AddProduct() {
       'Content-Type': 'multipart/form-data'
   }}
      ).then((response)=>{
-      const fileName=response.data.public_id;
-      console.log(fileName)
+      // setValues({ ...values, [e.target.name]: e.target.value })
+      setValues({ ...values, 'image_url': response.data.url })
+      console.log(values.url) 
   })
   .catch((err)=>{
     console.log(err)
   })
+
+  await axios.post("http://localhost:2882/products/insert",values,{ headers: {
+      'Content-Type': 'application/json'
+  }}
+     ).then((response)=>{
+      // const fileName=response.url;
+      console.log(response)   
+  })
+  .catch((err)=>{
+    console.log(err)
+  })
+
+
   }
   const [ingredients, setIngredients] = useState(['']);
   const [recipe, setRecipe] = useState(['']);
@@ -69,11 +83,12 @@ export default function AddProduct() {
   return (
     <div className="front body">
       <div className="container login-container">
-        <h2>Add Product</h2>
+        <h2 className='text-white'>Add Product</h2>
         <form onSubmit={(e) => handleSubmit(e)}>
-          <div>
+          {/* <div> */}
 
-            <input
+           <div className="form">
+           <input class="form-control"
               type="text"
               name="p_name"
               placeholder="Product Name"
@@ -81,16 +96,43 @@ export default function AddProduct() {
                 setValues({ ...values, [e.target.name]: e.target.value })
               }
             />
-          </div>
-          <div>
-          <input type="file" name="image" className="form-control"   onChange={(e)=>{setImage(e.target.files[0]);console.log(image)} } required />
-          </div>
+
+
+            <div className="category">
+              <span className='label-category'>
+              Category
+              </span>
+            <div class="form-check">
+
+              <input class="form-check-input" type="radio" name="category" onChange={(e) =>
+                setValues({ ...values, [e.target.name]: e.target.value })
+              } id="flexRadioDefault1" value="Non Veg" />
+              <label class="form-check-label" for="flexRadioDefault1">
+                Non Veg
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="category" onChange={(e) =>
+                setValues({ ...values, [e.target.name]: e.target.value })
+              } id="flexRadioDefault2" value="Veg" required />
+              <label class="form-check-label" for="flexRadioDefault2">
+                Veg
+              </label>
+            </div>
+            </div>
+
+
+
+          {/* </div>
+          <div> */}
+          <input class="form-control" type="file" name="image" className="form-control"   onChange={(e)=>{setImage(e.target.files[0]);console.log(image)} } required />
+          {/* </div> */}
 
         
 
 
           {ingredients.map((input, index) => (
-            <input
+            <input class="form-control"
               key={index}
               value={input}
               placeholder={`Ingredient ${index + 1}`}
@@ -100,7 +142,7 @@ export default function AddProduct() {
           <button type='button' onClick={handleAddInput}>Add Input</button>
 
           {recipe.map((input, index) => (
-            <input
+            <input class="form-control"
               key={index}
               value={input}
               placeholder={`Recipe Step ${index + 1}`}
@@ -115,8 +157,8 @@ export default function AddProduct() {
 
 
 
-          <div>
-            <input
+          {/* <div> */}
+            <input class="form-control"
               type="number"
               placeholder="Quantity (in grams)"
               name="quantity"
@@ -124,10 +166,10 @@ export default function AddProduct() {
                 setValues({ ...values, [e.target.name]: e.target.value })
               }
             />
-          </div>
+          {/* </div> */}
 
-          <div>
-            <input
+          {/* <div> */}
+            <input class="form-control"
               type="number"
               placeholder="Number of pieces"
               name="nop"
@@ -135,12 +177,13 @@ export default function AddProduct() {
                 setValues({ ...values, [e.target.name]: e.target.value })
               }
             />
-          </div>
+           </div>
+          {/* </div> */}
 
+          <div className='w-100 submit-btn'>
           <button type="submit">Submit</button>
-          <span>
-            Don't have an account ?<Link to="/register"> Register </Link>
-          </span>
+          </div>
+        
         </form>
         <ToastContainer />
       </div>

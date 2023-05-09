@@ -1,16 +1,14 @@
 const express = require('express')
 const upload = require('../middlewares/upload')
 const {uploadToCloudinary,removeFromCloudinary} =require('../cloudinary')
-const product = require('../models/productModel')
-
+const product = require('../models/productModel');
+const { ErrorCode } = require('react-dropzone');
 
 module.exports.AddProduct = async (req, res) => {
-        try{
-            // console.log(req.file)
-            const data = await uploadToCloudinary(req.file.path,"user-images")
-            req.body.image_url = data.url   
-            // console.log(req.body)
-            const newProduct = new product({image_url:data.url}) 
+        try{  
+            console.log(req.body)
+            
+            const newProduct = await new product(req.body) 
             await newProduct.save();
             console.log(newProduct)
             res.json("Success")
@@ -22,16 +20,15 @@ module.exports.AddProduct = async (req, res) => {
 
   module.exports.imageLink = async (req, res) => {
     try{
-        // console.log(req.file)
+        console.log("first")
        if(req.file)
        {
-        // console.log(req.file)
         const data = await uploadToCloudinary(req.file.path,"user-images")
-        const newProduct = new product({image_url:data.url}) 
-        await newProduct.save();
-        console.log(newProduct)
-        // console.log(data)
-        res.json("Success")
+        console.log(data)
+        res.json({url:data.url})
+       }    
+       else{
+        console.log("else")
        }
     }
     catch(err){
@@ -40,4 +37,46 @@ module.exports.AddProduct = async (req, res) => {
 };
 
 
-  
+module.exports.allProducts = async(req,res)=>{
+    try{
+        await product.find()
+        .then((data)=>{
+            res.send(data)
+        })
+        .catch((err)=>{
+            res.send(err)
+        console.log(err)
+
+        })
+    }
+
+    catch(err)
+    {
+        res.send(err)
+        console.log(err)
+    }
+} 
+
+
+
+
+module.exports.product = async(req,res)=>{
+    try{
+        console.log("first")
+        await product.findById(req.params.id)
+        .then((data)=>{
+            res.send(data)
+        })
+        .catch((err)=>{
+            res.send(err)
+        console.log(err)
+
+        })
+    }
+
+    catch(err)
+    {
+        res.send(err)
+        console.log(err)
+    }
+} 

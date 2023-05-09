@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const productSchema = new mongoose.Schema({
   p_name: {
     type: String,
+    "default":"",
     required: [true, "Product name is required"],
     unique: true,
   },
@@ -27,6 +28,11 @@ const productSchema = new mongoose.Schema({
   nop:{
     type:Number,
     required:[true,"Number of pieces is required"]
+  },
+  category:{
+    type:String,
+    required:[true,"Veg / Non veg category is required"]
+
   }
 });
 

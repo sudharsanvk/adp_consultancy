@@ -6,8 +6,23 @@ import zippy_logo from '../../images/zippy logo.png'
 import './NVProducts.css'
 import ProductCard from '../ProductCard/ProductCard'
 import Footer from '../Footer/Footer'
+import { useEffect } from 'react'
+import axios from 'axios'
+import { useState } from 'react'
 
 export default function NVProducts() {
+
+    const[data,setData] = useState([])
+
+    useEffect(()=>{
+        axios.get("http://localhost:2882/products/getAll")
+        .then((data)=>{
+            console.log(data.data)
+            setData(data.data)
+        })
+        },[])
+
+
   return (
     <>
         <Navbar/>
@@ -26,7 +41,19 @@ export default function NVProducts() {
         </div>
 
         <div className="product-card-group">
-            <ProductCard/>
+            {
+                data.filter((item)=>{return item.category=="Non Veg"}).map((item)=>{
+                    return(
+                      <>
+                      <ProductCard item={item} />
+                      <ProductCard item={item} />
+                      </>
+                    )
+                })
+            }
+        </div>
+
+        {/* <div className="product-card-group">
             <ProductCard/>
             <ProductCard/>
             <ProductCard/>
@@ -36,14 +63,8 @@ export default function NVProducts() {
             <ProductCard/>
             <ProductCard/>
             <ProductCard/>
-        </div>
-
-        <div className="product-card-group">
             <ProductCard/>
-            <ProductCard/>
-            <ProductCard/>
-            <ProductCard/>
-        </div>
+        </div> */}
 
     <Footer/>
     </>
