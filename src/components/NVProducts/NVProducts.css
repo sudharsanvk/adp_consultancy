@@ -28,7 +28,7 @@
 .product-card-group {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-evenly;
   }
   
   .product-card{
@@ -36,10 +36,12 @@
     margin: 1%;
     padding: 20px;
     flex-basis: 30%;
+    height: 300px !important;
     background-color: #f0f0f0;
   }
-  
-  .product-card:nth-child(4n + 1), .product-card:nth-child(4n + 2), .product-card:nth-child(4n + 3), .product-card:nth-child(4n + 4), .product-card:nth-child(4n + 5), .product-card:nth-child(4n + 6){
-    /* width: 30% !important; */
-    /* flex-basis: 20%;   */
+
+  .card-image{
+    height: 100%;
+    object-fit: cover !important;
   }
+  

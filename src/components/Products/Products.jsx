@@ -36,7 +36,7 @@ export default function Products() {
             <img src={zippy_logo} alt="" />
         </div>
 
-        <h2 className='product-type' >Non - Veg Prodcuts</h2>
+        <h2 className='product-type' >Prodcuts</h2>
 
         <div className="search-box">
             <input type="text" name="" id="" onChange={(e)=>{setSearch(e.target.value)}} placeholder='Search What you Love'/>
@@ -44,7 +44,7 @@ export default function Products() {
 
         <div className="product-card-group">
             {
-                data.filter((item)=>{return item.p_name.toLowerCase().includes(search.toLowerCase())}).filter((item)=>{return item.category=="Non Veg"}).map((item)=>{
+                data.filter((item)=>{return item.p_name.toLowerCase().includes(search.toLowerCase())}).map((item)=>{
                     return(
                       <>
                       <ProductCard item={item} />

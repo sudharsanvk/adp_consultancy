@@ -22,4 +22,5 @@ router.get('/get/:id',product);
 router.delete('/delete/:id',deleteOne);
 
 
+
 module.exports = router

@@ -2,7 +2,7 @@ import axios from 'axios';
 import React from 'react'
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom'
+import { useParams,useNavigate } from 'react-router-dom'
 import Navbar from '../Navbar/Navbar';
 import './Product.css'
 
@@ -12,10 +12,14 @@ import nv from '../../images/nv-veg-icon.png'
 export default function Product() {
 
     const id = useParams().id;
+    const navigate = useNavigate()
     console.log(id)
     const [data,setData] = useState([])
+    const [user,setUser] = useState([])
 
     useEffect(()=>{
+      setUser(localStorage.getItem('isLoggedIn'))
+
         axios.get(`http://localhost:2882/products/get/${id}`)
         .then((data)=>{
             setData(data.data)
@@ -30,12 +34,7 @@ export default function Product() {
   return (
     <div className='full-page'>
         <Navbar/>
-
-      
-
         <div className="product-page">
-
-          
             {
                 data.category==="Veg"?
                 (<img src={veg} className='veg-nv-icon' alt="" />):
@@ -49,9 +48,7 @@ export default function Product() {
 
             <div className="product-details">
 
-                <a className='add-to-cart' href="">
-                <i class="fa-solid fa-cart-plus"></i>
-                </a>
+               
 
                 <div className="product-name">
                     {data.p_name}
@@ -63,10 +60,10 @@ export default function Product() {
                     ₹ {data.price}
                 </div>
                 <div className="quantity">
-                    {data.quantity}
+                   Quantity : {data.quantity}
                 </div>
                 <div className="nop">
-                    {data.nop}
+                Number of pieces: {data.nop}
                 </div>
 
                 <div className="recipe-ingredients">
@@ -78,6 +75,34 @@ export default function Product() {
                     Recipe
                     </button>
                 </div>
+
+                {
+                  user?(
+                    <>
+                       <button className='button-cart' style={{background:'transparent'}} onClick={()=>{
+                    const id = localStorage.getItem('user')
+                    axios.post(`http://localhost:2882/cart/add/${id}`,{
+                        productId:data._id,
+                        quantity:1
+                    })
+                    .then((data)=>{
+                        console.log("add to cart")
+                        navigate('/cart')
+                    })
+                    .catch((err)=>{
+                        console.log("Error in cart" ,err)
+                    })
+                }}>
+                <span> </span><i class="fa-solid fa-cart-plus text-secondary w-100"></i>
+                </button>
+
+                    </>
+                  ):
+                  (
+                    <></>
+                  )
+                }
+
             </div>
         </div>
 

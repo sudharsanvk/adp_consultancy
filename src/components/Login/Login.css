@@ -16,7 +16,7 @@
 
   .login-container
   {
-    background-image: url('../../images/back.jpg');
+    /* background-image: url('../../images/back.jpg'); */
     background-size: contain;
   }
   
@@ -141,6 +141,16 @@
 }
 
 .submit-btn{
-  width: 82% !important;
+  width: 20% !important;
   margin: auto;
+}
+
+.auth-form{
+  width: 40%;
+  color: white;
+}
+
+.login-front{
+  /* height: 80vh; */
+  margin-top: 0 !important;
 }

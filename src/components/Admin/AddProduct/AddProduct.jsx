@@ -3,6 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import './AddProduct.css'
+import Navbar from '../Navbar/Navbar';
 
 export default function AddProduct() {
 
@@ -40,10 +41,12 @@ export default function AddProduct() {
   }}
      ).then((response)=>{
       // const fileName=response.url;
+      console.log("first")
       console.log(response)   
       navigate('/admin/products')
   })
   .catch((err)=>{
+    
     console.log(err)
   })
 
@@ -83,6 +86,8 @@ export default function AddProduct() {
 
 
   return (
+    <>
+    {/* <Navbar/> */}
     <div className="front body">
       <div className="container login-container">
         <h2 className='text-white'>Add Product</h2>
@@ -190,5 +195,6 @@ export default function AddProduct() {
         <ToastContainer />
       </div>
     </div>
+    </>
   )
 }

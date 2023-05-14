@@ -2,7 +2,7 @@
     height: 80vh;
     width: 60vw;
     margin: auto;
-    border-radius: 50px;
+    /* border-radius: 50px; */
     background-color: rgba(255, 255, 255, 0.836);
     margin-top: 30px;
 
@@ -16,13 +16,16 @@
 }
 
 .product-img{
-    width: 40%;
+    width: 80%;
     height: 100%;
 }
 
 .product-img img{
     width: 100%;
-    border-radius: 50px 0 0 50px;
+    /* border-radius: 50px 0 0 50px; */
+    border-top-right-radius: 35%;
+    border-bottom-right-radius: 35%;
+
     height: 100%;
     object-fit: cover;
 }
@@ -31,7 +34,8 @@
     width: 50%;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    gap: 20px;
+    justify-content:center;
 }
 
 .product-details div{
@@ -54,4 +58,20 @@
 {
     color: #FFBA00;
     font-size: 30px;
+}
+
+.product-name{
+    letter-spacing: 3px;
+}
+
+.recipe-ingredients{
+    display: flex;
+    margin-top: 10%;
+    justify-content: space-around;
+}
+
+
+.fa-cart-plus{
+    font-size: xx-large;
+    /* color: #FFBA00; */
 }

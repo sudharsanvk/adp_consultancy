@@ -7,6 +7,7 @@ const bodyParser = require('body-parser')
 const connectDB = require('./db')
 
 const authRoute = require("./routes/authRoute");
+const cartRoute = require("./routes/cartRoute");
 const productRouter = require('./routes/productRoute')
 
 const app = express()
@@ -25,6 +26,8 @@ app.use(bodyParser.urlencoded({extended:true}))
 app.use('/products',productRouter)
 
 app.use('/auth',authRoute)
+
+app.use('/cart',cartRoute)
 
 app.listen(2882,()=>{
     console.log("Serving at port 2882")

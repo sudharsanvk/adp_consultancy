@@ -58,6 +58,7 @@ export default function AdminProducts() {
                                      axios.delete(`http://localhost:2882/products/delete/${item._id}`)
                                      .then((data)=>{
                                          console.log(data)
+                                         navigate('/admin/products/')
                                      })
                                      .catch((err)=>{
                                          console.log(err)

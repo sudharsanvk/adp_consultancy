@@ -11,41 +11,6 @@ import './Navbar.css'
 
 export default function Navbar() {
     const navigate = useNavigate();
-    const [cookies, setCookie, removeCookie] = useCookies([]);
-    const [cook,setCook] = useState()
-    // console.log(cookies.jwt);
-    console.log(localStorage.getItem("token"))
-     useEffect(() => {
-        const verifyUser = async () => {
-            setCook(localStorage.getItem("token"))
-          if (!cookies.jwt) {
-            // navigate("/login");
-          } else {
-            const { data } = await axios.post(
-              "http://localhost:2882/auth/",
-              {},
-              {
-                withCredentials: true,
-              } 
-            );
-            if (!data.status) {
-              removeCookie("jwt");
-              navigate("/");
-            } else
-              toast(`Hi ${data.user} `, {
-                theme: "dark",
-              });
-          }
-        };
-        verifyUser();
-      }, [cookies, navigate, removeCookie]);
-
-      const logOut = ()=>{
-        localStorage.removeItem('token')
-        // navigate('/')
-        console.log("first")
-      }
-     
 
   return (
     <>
@@ -56,31 +21,31 @@ export default function Navbar() {
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item">
+                {/* <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">Today's Offer</a>
-                </li>
+                </li> */}
                 <li class="nav-item">
-                <a class="nav-link" href="#">Products</a>
+                <a class="nav-link" href="/admin/products">Products</a>
                 </li>
-                <li class="nav-item">
+                {/* <li class="nav-item">
                 <a class="nav-link" href="#">How to Cook</a>
-                </li>
+                </li> */}
                 <li class="nav-item">
                 <a class="navbar-brand" href="/">
                     <img src={adp} alt="" />
                 </a>
                 </li>
-                <li class="nav-item">
+                {/* <li class="nav-item">
                 <a class="nav-link" href="#">People</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link" href="#">Infrastructure</a>
-                </li>
+                </li> */}
                 <li class="nav-item">
                 <a class="nav-link" href="#">
 
                 {
-                    cook?(<button onClick={logOut()}>Log out</button>):(<Link to="/login">Login</Link>)
+                    // cook?(<button onClick={logOut()}>Log out</button>):(<Link to="/login">Login</Link>)
                 }
                    
                     

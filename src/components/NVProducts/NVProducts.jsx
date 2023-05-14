@@ -9,6 +9,7 @@ import Footer from '../Footer/Footer'
 import { useEffect } from 'react'
 import axios from 'axios'
 import { useState } from 'react'
+import TodayOffer from '../TodayOffer/TodayOffer'
 
 export default function NVProducts() {
 
@@ -28,7 +29,7 @@ export default function NVProducts() {
   return (
     <>
         <Navbar/>
-        <div className="zippy">
+    <div className="zippy">
             <img src={zippy} alt="" />
         </div>
 

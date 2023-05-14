@@ -9,11 +9,19 @@ import Register from './components/Register/Register'
 import AddProduct from './components/Admin/AddProduct/AddProduct'
 import AdminProduct from './components/Admin/Product/Product'
 import Product from './components/Product/Product'
-import EditProduct from './components/Admin/Products/Products'
 import AdminProducts from './components/Admin/Products/Products'
 import Products from './components/Products/Products'
+import Cart from './components/Cart/Cart'
+
+import withAuth from './ProtectedRoute';
+import ProtectedRoute from './ProtectedRoute'
+
+
 
 export default function Routing() {
+
+  // const [isLoggedIn,setIsLoggedIn] = useState()
+
   return (
     <>
     
@@ -27,6 +35,8 @@ export default function Routing() {
             <Route exact path="/register" element={<Register/>} />
             <Route exact path="/products" element={<Products/>} />
             <Route exact path="/product/:id" element={<Product/>} />
+            <Route exact path="/cart" element={<Cart/>} />
+
 
             <Route exact path="/admin/add" element={<AddProduct/>} />
             <Route exact path="/admin/products" element={<AdminProducts/>} />

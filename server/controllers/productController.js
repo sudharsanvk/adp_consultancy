@@ -107,3 +107,17 @@ module.exports.deleteOne = async(req,res)=>{
         console.log(err)
     }
 } 
+
+module.exports.AddProduct = async (req, res) => {
+    try{  
+        console.log(req.body)
+        
+        const newProduct = await new product(req.body) 
+        await newProduct.save()
+        console.log(newProduct)
+        res.json("Success")
+    }
+    catch(err){
+        console.log("Error in insertion",err)
+    }
+};

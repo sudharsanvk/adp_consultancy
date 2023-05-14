@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { ToastContainer, toast } from "react-toastify";
 import './Login.css'
+import Navbar from "../Navbar/Navbar";
 
 function Login() {
   const [cookies] = useCookies([]);
@@ -31,11 +32,13 @@ function Login() {
         { withCredentials: true }
       ).then(response => {
         console.log("token")
-        console.log(response.data.token)
+        console.log(response)
         console.log("token")
 
         localStorage.setItem('token', response.data.token);
+        localStorage.setItem('user', response.data.user);
         localStorage.setItem('isLoggedIn', true); 
+
 
           if (response.data.errors) {
             const { email, password } = response.data.errors;
@@ -57,8 +60,10 @@ function Login() {
     }
   };
   return (
-   <div className="front body">
-     <div className="container login-container">
+   <>
+   {/* <Navbar/> */}
+    <div className="front body login-front">
+     <div className="container auth-form login-container">
       <h2>Login to your Account</h2>
       <form onSubmit={(e) => handleSubmit(e)}>
         <div>
@@ -91,6 +96,7 @@ function Login() {
       <ToastContainer />
     </div>
    </div>
+   </>
   );
 }
 

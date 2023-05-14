@@ -7,12 +7,15 @@ import Example from '../Carousel/Carousel'
 import Food from '../Food/Food'
 import Team from '../Team/Team'
 import Footer from '../Footer/Footer'
+import TodayOffer from '../TodayOffer/TodayOffer'
 
 export default function Homepage() {
   return (
     <>
         <div className="front">
         <Navbar/>
+
+        <TodayOffer/>
 
         <div className="zippy">
             <img src={zippy} alt="" />

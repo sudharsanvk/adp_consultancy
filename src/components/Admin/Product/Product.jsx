@@ -58,10 +58,10 @@ export default function AdminProduct() {
                     ₹ {data.price}
                 </div>
                 <div className="quantity">
-                    {data.quantity}
+                Quantity :  {data.quantity}
                 </div>
                 <div className="nop">
-                    {data.nop}
+                Number of pieces:   {data.nop}
                 </div>
 
                 <div className="recipe-ingredients">

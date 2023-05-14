@@ -65,26 +65,31 @@ export default function Navbar() {
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item">
+                {/* <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">Today's Offer</a>
-                </li>
+                </li> */}
                 <li class="nav-item">
                 <a class="nav-link" href="/products">Products</a>
                 </li>
-                <li class="nav-item">
+                {/* <li class="nav-item">
                 <a class="nav-link" href="#">How to Cook</a>
-                </li>
+                </li> */}
                 <li class="nav-item">
                 <a class="navbar-brand" href="/">
                     <img src={adp} alt="" />
                 </a>
                 </li>
-                <li class="nav-item">
+                {/* <li class="nav-item">
                 <a class="nav-link" href="#">People</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#">Infrastructure</a>
-                </li>
+                </li> */}
+
+                {
+                    isLoggedIn?(<li class="nav-item">
+                    <a class="nav-link" href="/cart">My Cart</a>
+                    </li>):(<></>)
+                }
+
+                
                 <li class="nav-item">
                 <a class="nav-link" href="#">
 

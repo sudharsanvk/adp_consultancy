@@ -46,7 +46,7 @@ function Register() {
   };
   return (
   <div className="front body">
-    <div className="container">
+    <div className="container auth-form">
       <h2>Register Account</h2>
       <form onSubmit={(e) => handleSubmit(e)}>
         <div>
